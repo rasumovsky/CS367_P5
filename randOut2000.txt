@@ -1,0 +1,58 @@
+Results from 100 runs of ../files/randIn2000.txt
+
+HashMap: get
+--------------------
+Min : 0
+Max : 4
+Mean: 0.090
+Std Dev : 0.090
+
+HashMap: put
+--------------------
+Min : 0
+Max : 11
+Mean: 0.420
+Std Dev : 0.420
+
+HashMap: floorKey
+--------------------
+Min : 27
+Max : 45
+Mean: 29.520
+Std Dev : 2.520
+
+HashMap: remove
+--------------------
+Min : 0
+Max : 1
+Mean: 0.100
+Std Dev : 0.100
+
+TreeMap: get
+--------------------
+Min : 0
+Max : 2
+Mean: 0.120
+Std Dev : 0.120
+
+TreeMap: put
+--------------------
+Min : 0
+Max : 7
+Mean: 0.320
+Std Dev : 0.320
+
+TreeMap: floorKey
+--------------------
+Min : 0
+Max : 3
+Mean: 0.130
+Std Dev : 0.130
+
+TreeMap: remove
+--------------------
+Min : 0
+Max : 2
+Mean: 0.150
+Std Dev : 0.150
+
