@@ -160,6 +160,7 @@ public class SimpleHashMap<K extends Comparable<K>,V>
 	    
 	    // Add the new LinkedList bucket to the hash table:
 	    hashTable[this.hash(currEntry.getKey())] = currBucket;
+	    numItems++;
 	}
 	
 	// If there is a collision, add to the LinkedList bucket:
@@ -183,6 +184,7 @@ public class SimpleHashMap<K extends Comparable<K>,V>
 	    // Otherwise, add new Entry to end of the LinkedList
 	    if (result == null) {
 		currBucket.add(currEntry);
+		numItems++;
 	    }
 	}
 	
@@ -207,7 +209,7 @@ public class SimpleHashMap<K extends Comparable<K>,V>
 		(new LinkedList[tableSizes[sizeIndex]]);
 	    	    
 	    // Loop over old array.
-	    for (int i = 0; i < oldHashTable.length-1; i++) {
+	    for (int i = 0; i < oldHashTable.length; i++) {
 		
 		if (oldHashTable[i] != null) {
 		    
@@ -226,7 +228,6 @@ public class SimpleHashMap<K extends Comparable<K>,V>
 	}
 	
 	// Return previous value to which key was mapped:
-	numItems++;
 	return result;
     }   
     
