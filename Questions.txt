@@ -17,7 +17,9 @@ assumptions in your answer.
 lookup on that item.  What is the worst-case complexity of your program for 
 the lookup in this situation?  Briefly explain your answer.
 
-Answer:
+Answer: The worst-case would be all items hashed to the same index. If the item
+		is at the last of the list, the worst-case complexity would be O(N).
+		//not sure about this question
 
 
 For questions 2 - 4, you should use the TestHash program as written.
