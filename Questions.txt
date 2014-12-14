@@ -17,9 +17,19 @@ assumptions in your answer.
 lookup on that item.  What is the worst-case complexity of your program for 
 the lookup in this situation?  Briefly explain your answer.
 
-Answer: The worst-case would be all items hashed to the same index. If the item
-		is at the last of the list, the worst-case complexity would be O(N).
-		//not sure about this question
+Answer:
+
+The worst-case would be when all items are hashed to the same index. In that 
+instance, the values would be entered into one LinkedList bucket. There are two 
+possibilities:
+
+case (1) the LinkedList has a tail reference, so the add() method is O(1). 
+case (2) the LinkedList doesn't have a tail reference, so each call to add() 
+is O(N).
+
+Afterwards, there is the call to remove() for the LinkedList, which will be 
+O(N). Assuming Java uses a tail reference for the LinkedList, the result is 
+O(1) + O(N) = O(N).
 
 
 For questions 2 - 4, you should use the TestHash program as written.
@@ -411,10 +421,51 @@ affect the performance (times)?
 
 Answer:
 
+
+  
+The worst case scenario for a hash map is that the keys all map to the same
+hash index. This happens with the bad input files, since the keys are all 
+integers that equal zero when mod-ed by the current table size. In that case, 
+the hash table becomes a LinkedList with O(N) operations mostly. floorKey is 
+the most costly operation, since it requires a loop over the entire hash table 
+(length O(N) as well as all of the buckets (length O(N)). 
+	 
+	 
 5) Using the above data, give the complexity of each SimpleMapADT method for 
 SimpleTreeMap and SimpleHashMap.  Justify your answer with your run results.
 
 Answer:
 
+HashMap mean values for bad inputs (worst cases):
+  method   | N=1000 | N=2000 | N=10000 | W.C. Complexity |
+___________|________|________|_________|_________________|
+  get      | 0.020  | 0.090  | 0.710   | O(N)            |
+  put      | 0.370  | 0.530  | 2.610   | O(N)            |
+  floorKey | 8.740  | 40.61  | 1746.8  | O(N^2)          |
+  remove   | 0.030  | 0.140  | 0.690   | O(N)            |
+
+HashMap mean values for random inputs (average cases):
+  method   | N=1000 | N=2000 | N=10000 | Avg. Complexity |
+___________|________|________|_________|_________________|
+  get      | 0.070  | 0.070  | 0.540   | O(1)            |
+  put      | 0.310  | 0.290  | 1.410   | O(1)            |
+  floorKey | 6.150  | 19.70  | 476.3   | O(N^2)          |
+  remove   | 0.090  | 0.100  | 0.490   | O(1)            |
 
  
+
+TreeMap mean values for bad inputs (worst cases):
+  method   | N=1000 | N=2000 | N=10000 | W.C. Complexity |
+___________|________|________|_________|_________________|
+  get      | 0.170  | 0.220  | 0.890   | O(log(N))       |
+  put      | 0.150  | 0.310  | 1.520   | O(N)            |
+  floorKey | 0.160  | 0.150  | 0.930   | O(log(N))       |
+  remove   | 0.060  | 0.170  | 0.780   | O(N)            |
+
+TreeMap mean values for bad inputs (average cases):
+  method   | N=1000 | N=2000 | N=10000 | Avg. Complexity |
+___________|________|________|_________|_________________|
+  get      | 0.130  | 0.230  | 1.130   | O(log(N))       |
+  put      | 0.210  | 0.410  | 1.700   | O(log(N))       |
+  floorKey | 0.080  | 0.230  | 1.180   | O(N)            |
+  remove   | 0.090  | 0.220  | 0.710   | O(log(N))       |
