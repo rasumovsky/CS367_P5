@@ -39,7 +39,7 @@ public class FloorKeyTester{
 
         }
 
-
+        System.out.println(hash.get(10));
 
     }
 

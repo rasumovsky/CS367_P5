@@ -286,7 +286,7 @@ public class SimpleHashMap<K extends Comparable<K>,V>
 	K floor = null;
 	
 	// Loop over hash table elements:
-	for (int i = 0; i < hashTable.length-1; i++) {
+	for (int i = 0; i < hashTable.length; i++) {
 	    
 	    // Iterate over buckets:
 	    if (hashTable[i] != null) {
@@ -297,12 +297,12 @@ public class SimpleHashMap<K extends Comparable<K>,V>
 		    Entry<K,V> currItem = bucketIter.next();
 		    
 		    // If equal, don't have to continue loop.
-		    if (currItem.getKey().equals(key)) {
+		    if (currItem.getKey().compareTo(key) == 0) {
 			return currItem.getKey();
 		    }
 		    
  		    // Check if the Entry's key is less than the provided key:
-		    else if (currItem.getKey().compareTo(key) == -1) {
+		    else if (currItem.getKey().compareTo(key) < 0) {
  			
  			// Automatically assign floor if floor is null:
  			if (floor == null) {
@@ -311,7 +311,7 @@ public class SimpleHashMap<K extends Comparable<K>,V>
 			
  			// Otherwise, update floor if new Entry has higher key:
 
-			else if (currItem.getKey().compareTo(floor) == 1) {
+			else if (currItem.getKey().compareTo(floor) > 0) {
 			    floor = currItem.getKey();
 			}
 		    }
