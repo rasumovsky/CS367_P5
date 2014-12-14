@@ -142,7 +142,11 @@ public class MapBenchmark {
     	int numIter = 0; // Number of iterations to run
     	SimpleHashMap<Integer,String> hashMap;
     	SimpleMapADT<Integer,String> treeMap;
-    	List<Integer> keyList = new ArrayList<Integer>();
+	
+    	//List<Integer> keyList = new ArrayList<Integer>();
+	// Create a list to store all the key-value pairs from file:
+	List<Entry<Integer,String>> mapList
+	    = (ArrayList<Entry<Integer,String>>) (new ArrayList());
 	
     	// Create the hashMap and treeMap
     	if (args.length != 2) {
@@ -179,7 +183,8 @@ public class MapBenchmark {
 	    String value = line[1];
 	    
 	    // Store list of keys
-	    keyList.add(key);
+	    //keyList.add(key);
+	    mapList.add(new Entry<Integer,String>(key,value));
 	}
 	
 	// Iterate over the operations to get better measurements:
@@ -189,6 +194,7 @@ public class MapBenchmark {
 	    hashMap = new SimpleHashMap<Integer, String>();
 	    treeMap = new SimpleTreeMap<Integer, String>();
 	    
+	    /*
 	    // Clock the hashMap put() method for population:
 	    long startTime = System.currentTimeMillis();
 	    fileScanner = new Scanner(inputFile);
@@ -223,8 +229,6 @@ public class MapBenchmark {
 	    elapsed = System.currentTimeMillis() - startTime;
 	    treePop[ndx] = elapsed;
 	    
-	    
-	    /*
 	    // Clock the hashMap get() method:
 	    startTime = System.currentTimeMillis();
 	    
@@ -299,45 +303,57 @@ public class MapBenchmark {
 	    
 	    // Loop over 6 of the computations that require similar code
 	    // (get, floor, remove for each map). Clock each in the loop.
-	    for (int valIter = 0; valIter < 6; valIter++) {
-		
+	    for (int valIdx = 0; valIdx < 6; valIdx++) {
+				
 		// Clock the hashMap get() method:
-		startTime = System.currentTimeMillis();
+		long startTime = System.currentTimeMillis();
 		// Iterate over keys stored in the structures:
-		Iterator<Integer> itr = keyList.iterator();
+		Iterator<Entry<Integer,String>> itr = mapList.iterator();
 		while (itr.hasNext()) {
 		    
+		    Entry<Integer,String> currEntry = itr.next();
+		    
 		    // Perform specified operation on specified structure:
-		    switch (valIter) {
-		    case 0: hashMap.get(itr.next());
+		    switch (valIdx) {
+		    case 0: hashMap.put(currEntry.getKey(),
+					currEntry.getValue());
 			break;
-		    case 1: treeMap.get(itr.next());
+		    case 1: treeMap.put(currEntry.getKey(),
+					currEntry.getValue());
 			break;
-		    case 2: hashMap.floorKey(itr.next());
+		    case 2: hashMap.get(currEntry.getKey());
 			break;
-		    case 3: treeMap.floorKey(itr.next());
+		    case 3: treeMap.get(currEntry.getKey());
 			break;
-		    case 4: hashMap.remove(itr.next());
+		    case 4: hashMap.floorKey(currEntry.getKey());
 			break;
-		    case 5: treeMap.remove(itr.next());
+		    case 5: treeMap.floorKey(currEntry.getKey());
+			break;
+		    case 6: hashMap.remove(currEntry.getKey());
+			break;
+		    case 7: treeMap.remove(currEntry.getKey());
 			break;
 		    }
 		}
 		
 		// Calculate and store elapsed time:
-		elapsed = System.currentTimeMillis() - startTime;
-		switch (valIter) {
-		case 0: hashGet[ndx] = elapsed;
+		long elapsed = System.currentTimeMillis() - startTime;
+		switch (valIdx) {
+		case 0: hashPop[ndx] = elapsed;
 		    break;
-		case 1: treeGet[ndx] = elapsed;
+		case 1: treePop[ndx] = elapsed;
 		    break;
-		case 2: hashFloor[ndx] = elapsed;
+		case 2: hashGet[ndx] = elapsed;
 		    break;
-		case 3: treeFloor[ndx] = elapsed;
+		case 3: treeGet[ndx] = elapsed;
 		    break;
-		case 4: hashRemove[ndx] = elapsed;
+		case 4: hashFloor[ndx] = elapsed;
 		    break;
-		case 5: treeRemove[ndx] = elapsed;
+		case 5: treeFloor[ndx] = elapsed;
+		    break;
+		case 6: hashRemove[ndx] = elapsed;
+		    break;
+		case 7: treeRemove[ndx] = elapsed;
 		    break;
 		}
 	    }
@@ -348,13 +364,13 @@ System.out.print(String.format("%.2f",100* ndx/(float)numIter) + "% done \r");
 
 	// Obtain and print results for each structure and operation:
 	System.out.println("Result:");
-	printResult(hashPop,"Populating HashMap");
-	printResult(treePop, "Populating TreeMap");
-	printResult(hashGet, "HashMap get values");
-	printResult(treeGet, "TreeMap get values");
-	printResult(hashFloor, "HashMap floorKey");
-	printResult(treeFloor, "TreeMap floorKey");
-	printResult(hashRemove, "HashMap remove");
-	printResult(treeRemove, "TreeMap remove");
+	printResult(hashPop, "HashMap: put");
+	printResult(treePop, "TreeMap: put");
+	printResult(hashGet, "HashMap: get");
+	printResult(treeGet, "TreeMap: get");
+	printResult(hashFloor, "HashMap: floorKey");
+	printResult(treeFloor, "TreeMap: floorKey");
+	printResult(hashRemove, "HashMap: remove");
+	printResult(treeRemove, "TreeMap: remove");
     }
 }
