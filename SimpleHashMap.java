@@ -117,7 +117,7 @@ public class SimpleHashMap<K extends Comparable<K>,V>
 		
 		Entry<K, V> currItem = bucketIter.next();
 		
-		if (key.compareTo(currItem.getKey()) == 0) {
+		if (key.equals(currItem.getKey())) {
 		    return currItem.getValue();
 		}
 	    }
@@ -175,7 +175,7 @@ public class SimpleHashMap<K extends Comparable<K>,V>
 		Entry<K,V> currItem = bucketIter.next();
 		
 		// Update Entry value if a matching key found in the bucket:
-		if (currItem.getKey().compareTo(currEntry.getKey()) == 0) {
+		if (currItem.getKey().equals(currEntry.getKey())) {
 		    result = currItem.setValue(currEntry.getValue());
 		}
 	    }
@@ -256,7 +256,7 @@ public class SimpleHashMap<K extends Comparable<K>,V>
 		Entry<K,V> currItem = bucketIter.next();
 		
 		// If key of current Entry matches, remove and return the Entry:
-		if (currItem.getKey().compareTo(key) == 0) {
+		if (currItem.getKey().equals(key)) {
 		    
 		    V result = currItem.getValue();
 		    currBucket.remove(currItem);
