@@ -140,10 +140,8 @@ public class MapBenchmark {
     public static void main(String[] args) throws FileNotFoundException {
 	
     	int numIter = 0; // Number of iterations to run
-    	SimpleHashMap<Integer,String> hashMap
-	    = new SimpleHashMap<Integer, String>();
-    	SimpleMapADT<Integer,String> treeMap
-	    = new SimpleTreeMap<Integer, String>();
+    	SimpleHashMap<Integer,String> hashMap;
+    	SimpleMapADT<Integer,String> treeMap;
     	List<Integer> keyList = new ArrayList<Integer>();
 	
     	// Create the hashMap and treeMap
@@ -186,6 +184,9 @@ public class MapBenchmark {
 	
 	
 	for (int ndx = 0; ndx < numIter; ndx++) {
+		hashMap = new SimpleHashMap<Integer, String>();
+		treeMap = new SimpleTreeMap<Integer, String>();
+
 		// Clock the hashMap put() method for population:
 	    long startTime = System.currentTimeMillis();
 	    fileScanner = new Scanner(inputFile);
