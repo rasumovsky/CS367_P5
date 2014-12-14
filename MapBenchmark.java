@@ -6,7 +6,7 @@ import java.io.FileNotFoundException;
 public class MapBenchmark{
 
     public static void main(String[] args) {
-        int numIter; //number of iterations to run
+        int numIter = 0; //number of iterations to run
 
        for(int ndx = 0;ndx < numIter;ndx++){
 			//Basic progress bar
