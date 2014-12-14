@@ -1,10 +1,10 @@
 /*******************************************************************************
 File:             Questions.txt
 
-Author:           <your name and CS login>
-                  <your partner's name and CS login, if pair programming>
+Author:           Andrew Hard, hard@wisc.edu
+		  Wayne Chew, mchew2@wisc.edu
 
-Completion Date:  <date you completed this source file>
+Completion Date:  12/14/2014
 
 Course:           CS 367, Spring 2014
 *******************************************************************************/
