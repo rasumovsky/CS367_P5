@@ -142,8 +142,7 @@ public class MapBenchmark {
     	int numIter = 0; // Number of iterations to run
     	SimpleHashMap<Integer,String> hashMap;
     	SimpleMapADT<Integer,String> treeMap;
-	
-    	//List<Integer> keyList = new ArrayList<Integer>();
+    	
 	// Create a list to store all the key-value pairs from file:
 	List<Entry<Integer,String>> mapList
 	    = (ArrayList<Entry<Integer,String>>) (new ArrayList());
@@ -176,7 +175,7 @@ public class MapBenchmark {
 	}
 	
 	// Scan input file to store list of keys:
-	Scanner fileScanner = new Scanner(inputFile);
+	/*Scanner fileScanner = new Scanner(inputFile);
 	while (fileScanner.hasNext()) {
 	    String[] line = fileScanner.nextLine().split(" ");
 	    int key = Integer.parseInt(line[0]);
@@ -185,8 +184,31 @@ public class MapBenchmark {
 	    // Store list of keys
 	    //keyList.add(key);
 	    mapList.add(new Entry<Integer,String>(key,value));
+	}*///normal array seems to be faster than ArrayList
+	int lines = 0;
+	Scanner fileScanner = new Scanner(inputFile);
+	while(fileScanner.hasNext()){
+		lines++;
+		fileScanner.nextLine();
 	}
-	
+
+	int keyItr = 0;
+	int valueItr = 0;
+	int[] keys = new int[lines];
+	String[] values = new String[lines];
+
+	fileScanner = new Scanner(inputFile);
+	while(fileScanner.hasNext()){
+		String[] line = fileScanner.nextLine().split(" ");
+	    int key = Integer.parseInt(line[0]);
+	    String value = line[1];
+
+	    keys[keyItr] = key;
+	    values[valueItr] = value;
+	    keyItr++;
+	    valueItr++;
+	}
+
 	// Iterate over the operations to get better measurements:
 	for (int ndx = 0; ndx < numIter; ndx++) {
 	    
@@ -201,7 +223,7 @@ public class MapBenchmark {
 		// Clock the hashMap get() method:
 		long startTime = System.currentTimeMillis();
 		// Iterate over keys stored in the structures:
-		Iterator<Entry<Integer,String>> itr = mapList.iterator();
+		/*Iterator<Entry<Integer,String>> itr = mapList.iterator();
 		while (itr.hasNext()) {
 		    
 		    Entry<Integer,String> currEntry = itr.next();
@@ -226,7 +248,28 @@ public class MapBenchmark {
 			break;
 		    case 7: treeMap.remove(currEntry.getKey());
 			break;
+		    }*///change implementation to speed up the time
+
+		    for(int i = 0; i < lines; i++){
+		    	switch (valIdx) {
+		    case 0: hashMap.put(keys[i],values[i]);
+			break;
+		    case 1: treeMap.put(keys[i],values[i]);
+			break;
+		    case 2: hashMap.get(keys[i]);
+			break;
+		    case 3: treeMap.get(keys[i]);
+			break;
+		    case 4: hashMap.floorKey(keys[i]);
+			break;
+		    case 5: treeMap.floorKey(keys[i]);
+			break;
+		    case 6: hashMap.remove(keys[i]);
+			break;
+		    case 7: treeMap.remove(keys[i]);
+			break;
 		    }
+
 		}
 		
 		// Calculate and store elapsed time:
@@ -254,7 +297,7 @@ public class MapBenchmark {
 	    //Basic progress bar
 System.out.print(String.format("%.2f",100* ndx/(float)numIter) + "% done \r"); 
 	}
-
+	fileScanner.close();
 	// Obtain and print results for each structure and operation:
 	System.out.println("Result:");
 	printResult(hashGet, "HashMap: get");
