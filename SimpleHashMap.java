@@ -296,19 +296,13 @@ public class SimpleHashMap<K extends Comparable<K>,V>
 		    
 		    Entry<K,V> currItem = bucketIter.next();
 		    
-		    // If equal, don't have to continue loop.
-		    if (currItem.getKey().equals(key)) {
-			return currItem.getKey();
-		    }
-		    
 		    // Check if the Entry's key is less than the provided key:
-		    else if (currItem.getKey().compareTo(key) == -1) {
+		    if (currItem.getKey().compareTo(key) == -1) {
 			
 			// Automatically assign floor if floor is null:
 			if (floor == null) {
 			    floor = currItem.getKey();
 			}
-			
 			// Otherwise, update floor if new Entry has higher key:
 			else if (currItem.getKey().compareTo(floor) == 1) {
 			    floor = currItem.getKey();
