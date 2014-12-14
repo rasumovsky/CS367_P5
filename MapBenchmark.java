@@ -184,8 +184,9 @@ public class MapBenchmark {
 	    keyList.add(key);
 	}
 	
-	// Clock the hashMap put() method for population:
+	
 	for (int ndx = 0; ndx < numIter; ndx++) {
+		// Clock the hashMap put() method for population:
 	    long startTime = System.currentTimeMillis();
 	    fileScanner = new Scanner(inputFile);
 	    
@@ -203,13 +204,8 @@ public class MapBenchmark {
 	    long elapsed = System.currentTimeMillis() - startTime;
 	    hashPop[ndx] = elapsed;
 	    
-	    //Basic progress bar
-System.out.print(String.format("%.2f",100* ndx/(float)numIter) + "% done \r"); 
-	}
-	
 	// Clock the treeMap put() method for population:
-	for (int ndx = 0; ndx < numIter; ndx++) {
-	    long startTime = System.currentTimeMillis();
+	    startTime = System.currentTimeMillis();
 	    fileScanner = new Scanner(inputFile);
 	    
 	    while (fileScanner.hasNext()) {
@@ -223,16 +219,11 @@ System.out.print(String.format("%.2f",100* ndx/(float)numIter) + "% done \r");
 	    }
 	    
 	    // Calculate and store elapsed time:
-	    long elapsed = System.currentTimeMillis() - startTime;
+	    elapsed = System.currentTimeMillis() - startTime;
 	    treePop[ndx] = elapsed;
 	    
-	    //Basic progress bar
-System.out.print(String.format("%.2f",100* ndx/(float)numIter) + "% done \r"); 
-	}
-	
 	// Clock the hashMap get() method:
-	for (int ndx = 0; ndx < numIter; ndx++) {
-	    long startTime = System.currentTimeMillis();
+	    startTime = System.currentTimeMillis();
 	    
 	    Iterator<Integer> itr = keyList.iterator();
 	    while (itr.hasNext()) {
@@ -240,126 +231,72 @@ System.out.print(String.format("%.2f",100* ndx/(float)numIter) + "% done \r");
 	    }
 	    
 	    // Calculate and store elapsed time:
-	    long elapsed = System.currentTimeMillis() - startTime;
+	    elapsed = System.currentTimeMillis() - startTime;
 	    hashGet[ndx] = elapsed;
 	    
-	    //Basic progress bar
-System.out.print(String.format("%.2f",100* ndx/(float)numIter) + "% done \r"); 
-	}
-	
 	// Clock the treeMap get() method:
-	for (int ndx = 0; ndx < numIter; ndx++) {
-	    long startTime = System.currentTimeMillis();
+	    startTime = System.currentTimeMillis();
 	    
-	    Iterator<Integer> itr = keyList.iterator();
+	    itr = keyList.iterator();
 	    while (itr.hasNext()) {
 		treeMap.get(itr.next());
 	    }
 	    
 	    // Calculate and store elapsed time:
-	    long elapsed = System.currentTimeMillis() - startTime;
+	    elapsed = System.currentTimeMillis() - startTime;
 	    treeGet[ndx] = elapsed;
 	    
-	    //Basic progress bar
-System.out.print(String.format("%.2f",100* ndx/(float)numIter) + "% done \r"); 
-	}
-	
 	// Clock the hashMap floorKey() method:
-	for (int ndx = 0; ndx < numIter; ndx++) {
-	    long startTime = System.currentTimeMillis();
+	    startTime = System.currentTimeMillis();
 	    
-	    Iterator<Integer> itr = keyList.iterator();
+	    itr = keyList.iterator();
 	    while (itr.hasNext()) {
 		hashMap.floorKey(itr.next());
 	    }
 	    
 	    // Calculate and store elapsed time:
-	    long elapsed = System.currentTimeMillis() - startTime;
+	    elapsed = System.currentTimeMillis() - startTime;
 	    hashFloor[ndx] = elapsed;
 	    
-	    //Basic progress bar
-System.out.print(String.format("%.2f",100* ndx/(float)numIter) + "% done \r"); 
-	}
-	
 	// Clock the treeMap floorKey() method:	
-	for (int ndx = 0; ndx < numIter; ndx++) {
-	    long startTime = System.currentTimeMillis();
+	    startTime = System.currentTimeMillis();
 	    
-	    Iterator<Integer> itr = keyList.iterator();
+	    itr = keyList.iterator();
 	    while (itr.hasNext()) {
 		treeMap.floorKey(itr.next());
 	    }
 	    
 	    // Calculate and store elapsed time:
-	    long elapsed = System.currentTimeMillis() - startTime;
+	    elapsed = System.currentTimeMillis() - startTime;
 	    treeFloor[ndx] = elapsed;
 	    
-	    //Basic progress bar
-System.out.print(String.format("%.2f",100* ndx/(float)numIter) + "% done \r"); 
-	}
-	
 	// Clock the hashMap remove() method:
-	for (int ndx = 0; ndx < numIter; ndx++) {
-	    long startTime = System.currentTimeMillis();
+	    startTime = System.currentTimeMillis();
 	    
-	    Iterator<Integer> itr = keyList.iterator();
+	    itr = keyList.iterator();
 	    while (itr.hasNext()) {
 		hashMap.remove(itr.next());
 	    }
 	    
 	    // Calculate and store elapsed time:
-	    long elapsed = System.currentTimeMillis() - startTime;
+	    elapsed = System.currentTimeMillis() - startTime;
 	    hashRemove[ndx] = elapsed;
 	    
-	    // ************
-	    // I think this shows why we only should have one iteration loop.
-	    fileScanner = new Scanner(inputFile);
-	    while (fileScanner.hasNext()) {
-		//get key and value
-		String[] line = fileScanner.nextLine().split(" ");
-		int key = Integer.parseInt(line[0]);
-		String value = line[1];
-		
-		//insert key and value into hashMap
-		hashMap.put(key, value);
-	    }
-	    // ************
-	    
-	    //Basic progress bar
-System.out.print(String.format("%.2f",100* ndx/(float)numIter) + "% done \r"); 
-	}
-	
 	// Clock the treeMap remove() method:
-	for (int ndx = 0; ndx < numIter; ndx++) {
-	    long startTime = System.currentTimeMillis();
+	    startTime = System.currentTimeMillis();
 	    
-	    Iterator<Integer> itr = keyList.iterator();
+	    itr = keyList.iterator();
 	    while (itr.hasNext()) {
 		treeMap.remove(itr.next());
 	    }
 	    
-	    long elapsed = System.currentTimeMillis() - startTime;
+	    elapsed = System.currentTimeMillis() - startTime;
 	    treeRemove[ndx] = elapsed;
-	    
-	    
-	    // ************
-	    // I think this shows why we only should have one iteration loop.
-	    fileScanner = new Scanner(inputFile);
-	    while (fileScanner.hasNext()) {
-		//get key and value
-		String[] line = fileScanner.nextLine().split(" ");
-		int key = Integer.parseInt(line[0]);
-		String value = line[1];
-		
-		//insert key and value into hashMap
-		treeMap.put(key, value);
-	    }
-	    // ************
 	    
 	    //Basic progress bar
 System.out.print(String.format("%.2f",100* ndx/(float)numIter) + "% done \r"); 
 	}
-		
+
 	// Obtain and print results for each structure and operation:
 	System.out.println("Result:");
 	printResult(hashPop,"Populating HashMap");
