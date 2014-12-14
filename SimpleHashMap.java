@@ -196,13 +196,16 @@ public class SimpleHashMap<K extends Comparable<K>,V>
 	    // Duplicate the old hash table:
 	    LinkedList<Entry<K,V>>[] oldHashTable = hashTable;
 	    
-	    // increment the hash index:
-	    sizeIndex++;
+	    // increment the hash index (don't let it exceed prime table size):
+	    if (sizeIndex < tableSizes.length-1) {
+		sizeIndex++;
+	    }
 	    
 	    // Create a new hashTable to copy over old entries:
-	    LinkedList<Entry<K,V>>[] hashTable = (LinkedList<Entry<K,V>>[])
-		(new LinkedList[tableSizes[sizeIndex]]);;
-	    
+	    //LinkedList<Entry<K,V>>[]
+	    hashTable = (LinkedList<Entry<K,V>>[])
+		(new LinkedList[tableSizes[sizeIndex]]);
+	    	    
 	    // Loop over old array.
 	    for (int i = 0; i < oldHashTable.length-1; i++) {
 		
@@ -223,6 +226,7 @@ public class SimpleHashMap<K extends Comparable<K>,V>
 	}
 	
 	// Return previous value to which key was mapped:
+	numItems++;
 	return result;
     }   
     
@@ -260,6 +264,7 @@ public class SimpleHashMap<K extends Comparable<K>,V>
 		    
 		    V result = currItem.getValue();
 		    currBucket.remove(currItem);
+		    numItems--;
 		    return result;
 		}
 	    }
