@@ -47,9 +47,9 @@ public class SimpleHashMap<K extends Comparable<K>,V>
     // Store the number of elements contained:
     private int numItems;
     // Store the index for the table size prime number:
-    private int currTableIndex;
+    private int sizeIndex;
     // Array to store the hash table with LinkedList buckets:
-    private List<Entry<K, V>>[] hashTable;
+    private LinkedList<Entry<K, V>>[] hashTable;
     
     
     /**
@@ -58,51 +58,9 @@ public class SimpleHashMap<K extends Comparable<K>,V>
      */
     public SimpleHashMap() {
 	numItems = 0;
-	currTableIndex = 0;
-	hashTable = (LinkedList<Entry<K, V>>[]) (new LinkedList[tableSizes[currTableIndex]]);
-    }
-    
-    
-    /**
-     * A private method for checking the load factor of the hash table and
-     * updating the table size when the load factor is exceeded. 
-     */
-    private void checkLoadFactor() {
-	
-	// Calculate the current load factor:
-	double currLoadFactor = (double)numItems / 
-	    ((double)tableSizes(currTableIndex));
-	
-	// Resize the hash table if load factor exceeded:
-	if (currLoadFactor > lf) {
-	    
-	    // increment the hash index:
-	    currTableIndex++;
-	    
-	    // Create a new table to copy over old entries:
-	    private List<Entry<K, V>>[] newTable = (LinkedList<Entry<K, V>>[]) (new LinkedList[tableSizes[currTableIndex]]);;
-	    
-	    // Loop over old array.
-	    for (int i = 0; i < hashTable.length-1; i++) {
-		
-		if (hashTable[i] != null) {
-		    
-		    // Iterate over the current LinkedList:
-		    Iterator<Entry<K,V>> listIter = hashTable[i].iterator();
-		    while (listIter.hasNext()) {
-			
-			Entry<K, V> currItem = listIter.next();
-			
-			//compute a new hash index and add to new array:
-			newTable[this.hash(currItem.getKey())] = currItem;
-		    }
-		}
-	    }
-	    
-	    // Assign new array to variable name of old array.
-	    hashTable = newTable;
-	    
-	}
+	sizeIndex = 0;
+	hashTable = (LinkedList<Entry<K, V>>[])
+	    (new LinkedList[tableSizes[sizeIndex]]);
     }
     
     
@@ -122,11 +80,11 @@ public class SimpleHashMap<K extends Comparable<K>,V>
 	}
 	
 	// modulo the Java has value by the table size:
-	int newHashValue = k.hashCode() % tableSizes[currTableIndex];
+	int newHashValue = k.hashCode() % tableSizes[sizeIndex];
 	
 	// if the has value is negative, add table size:
 	if (newHashValue < 0) { 
-	    return newHashValue + tableSizes[currTableIndex];
+	    return newHashValue + tableSizes[sizeIndex];
 	}
 	else {
 	    return newHashValue;
@@ -152,11 +110,12 @@ public class SimpleHashMap<K extends Comparable<K>,V>
 	// Check that the key corresponds to a hash table entry:
 	if (hashTable[this.hash(key)] != null) {
 	    
-	    // Iterate over the LinkedList bucket:
-	    Iterator<Entry<K,V>> listIter = hashTable[this.hash(key)].iterator();
-	    while (listIter.hasNext()) {
+	    // Iterate over the bucket (LinkedList):
+	    Iterator<Entry<K,V>> bucketIter
+		= hashTable[this.hash(key)].iterator();
+	    while (bucketIter.hasNext()) {
 		
-		Entry<K, V> currItem = listIter.next();
+		Entry<K, V> currItem = bucketIter.next();
 		
 		if (key.compareTo(currItem.getKey()) == 0) {
 		    return currItem.getValue();
@@ -196,7 +155,7 @@ public class SimpleHashMap<K extends Comparable<K>,V>
 	    
 	    // Create a new LinkedList bucket for the hash table with new entry:
 	    LinkedList<Entry<K,V>> currBucket
-		= (LinkedList<Entry<K,V>>) (new LinkedList);
+		= (LinkedList<Entry<K,V>>) (new LinkedList());
 	    currBucket.add(currEntry);
 	    
 	    // Add the new LinkedList bucket to the hash table:
@@ -209,6 +168,7 @@ public class SimpleHashMap<K extends Comparable<K>,V>
 	    // Iterate to check for other elements with same key:
 	    LinkedList<Entry<K,V>> currBucket
 		= hashTable[this.hash(currEntry.getKey())];
+	    
 	    Iterator<Entry<K,V>> bucketIter = currBucket.iterator();
 	    while (bucketIter.hasNext()) {
 		
@@ -227,7 +187,42 @@ public class SimpleHashMap<K extends Comparable<K>,V>
 	}
 	
 	// Check load factor, resize table if necessary, then return result:
-	checkLoadFactor();
+	double currLoadFactor = (double)numItems / 
+	    ((double)tableSizes[sizeIndex]);
+	
+	// Resize the hash table if load factor exceeded:
+	if (currLoadFactor > lf) {
+	    
+	    // Duplicate the old hash table:
+	    LinkedList<Entry<K,V>>[] oldHashTable = hashTable;
+	    
+	    // increment the hash index:
+	    sizeIndex++;
+	    
+	    // Create a new hashTable to copy over old entries:
+	    LinkedList<Entry<K,V>>[] hashTable = (LinkedList<Entry<K,V>>[])
+		(new LinkedList[tableSizes[sizeIndex]]);;
+	    
+	    // Loop over old array.
+	    for (int i = 0; i < oldHashTable.length-1; i++) {
+		
+		if (oldHashTable[i] != null) {
+		    
+		    // Iterate over the old bucket:
+		    Iterator<Entry<K,V>> oldBucketIter
+			= oldHashTable[i].iterator();
+		    while (oldBucketIter.hasNext()) {
+			
+			Entry<K,V> oldEntry = oldBucketIter.next();
+			
+			// Recursive call to put() method:
+			this.put(oldEntry.getKey(), oldEntry.getValue());
+		    }
+		}
+	    }
+	}
+	
+	// Return previous value to which key was mapped:
 	return result;
     }   
     
@@ -235,15 +230,14 @@ public class SimpleHashMap<K extends Comparable<K>,V>
     /**
      * Removes the mapping for the specified key from this map if present. This
      * method does nothing if the key is not in the map.
-     *
      * @param key - key whose mapping is to be removed from the map
-     * @return the previous value associated with key, or null
-     * if there was no mapping for key.
+     * @return the previous value associated with key, or null if there was no
+     * mapping for key.
      * @throws NullPointerException if key is null
      */
     public V remove(K key) {
 	
-	// Check that non-null arguments are provided:
+	// Check that non-null key is provided:
 	if (key == null) {
 	    throw new NullPointerException();
 	}
@@ -253,6 +247,7 @@ public class SimpleHashMap<K extends Comparable<K>,V>
 	    return null;
 	}
 	
+	// Otherwise, iterate over the corresponding bucket in the hash table:
 	else {
 	    LinkedList<Entry<K,V>> currBucket = hashTable[this.hash(key)];
 	    Iterator<Entry<K,V>> bucketIter = currBucket.iterator();
@@ -260,22 +255,63 @@ public class SimpleHashMap<K extends Comparable<K>,V>
 		
 		Entry<K,V> currItem = bucketIter.next();
 		
+		// If key of current Entry matches, remove and return the Entry:
 		if (currItem.getKey().compareTo(key) == 0) {
-		    return currBucket.remove(currItem);
+		    
+		    V result = currItem.getValue();
+		    currBucket.remove(currItem);
+		    return result;
 		}
 	    }
 	}
-    }   
+	
+	return null;
+    }
     
     
    /**
-     * Returns the greatest key less than or equal to the given key, or null if there is no such key. 
-	 * Throws NullPointerException if key is null. 
+     * Returns the greatest key less than or equal to the given key, or null if
+     * there is no such key. 
      * @param key key whose floor should be found
      * @return the largest key smaller than the one passed to it
      * @throws NullPointerException if key is null
      */
     public K floorKey(K key) {
 
+	// Check that non-null key is provided:
+	if (key == null) {
+	    throw new NullPointerException();
+	}
+	
+	K floor = null;
+	
+	// Loop over hash table elements:
+	for (int i = 0; i < hashTable.length-1; i++) {
+	    
+	    // Iterate over buckets:
+	    if (hashTable[i] != null) {
+		
+		Iterator<Entry<K,V>> bucketIter = hashTable[i].iterator();
+		while (bucketIter.hasNext()) {
+		    
+		    Entry<K,V> currItem = bucketIter.next();
+		    
+		    // Check if the Entry's key is less than the provided key:
+		    if (currItem.getKey().compareTo(key) == -1) {
+			
+			// Automatically assign floor if floor is null:
+			if (floor == null) {
+			    floor = currItem.getKey();
+			}
+			// Otherwise, update floor if new Entry has higher key:
+			else if (currItem.getKey().compareTo(floor) == 1) {
+			    floor = currItem.getKey();
+			}
+		    }
+		}
+	    }
+	}
+	
+	return floor;
     }
 }
