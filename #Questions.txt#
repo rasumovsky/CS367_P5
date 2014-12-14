@@ -1,0 +1,62 @@
+/*******************************************************************************
+File:             Questions.txt
+
+Author:           Andrew Hard, hard@wisc.edu
+		  Wayne Chew, mchew2@wisc.edu
+
+Completion Date:  12/14/2014
+
+Course:           CS 367, Spring 2014
+*******************************************************************************/
+Directions: answer the following five (5) questions.  Note: some of the 
+questions may require you to know how the LinkedList class is implemented; in 
+these cases, you should make a reasonable assumption and clearly indicate your
+assumptions in your answer.
+
+1) Suppose you insert an item into your hashtable and then immediately do a 
+lookup on that item.  What is the worst-case complexity of your program for 
+the lookup in this situation?  Briefly explain your answer.
+
+Answer:
+
+
+For questions 2 - 4, you should use the MapBenchmark program as written.
+
+2) In this question you will run MapBenchmark four times using the parameters 
+indicated below:
+	run1		 randIn1000.txt 100
+	run2		 randIn2000.txt 100
+	run3 		randIn10000.txt 100
+
+What is the output for each of the runs?  
+
+Answer:
+
+
+3) In this question you will again run TestHash four times, this time using the 
+parameters:
+	run4		 badIn1000.txt 100
+	run5		 badIn2000.txt 100
+	run6 		badIn10000.txt 100
+
+What is the output for each of the runs?  
+
+Answer:
+
+4) Briefly analyze your results from questions 2 and 3. Consider the 
+following aspects:
+	- underlying data structure
+	- the number of inputs
+	- the input file
+How do these aspects influence the statistics? How do the table statistics 
+affect the performance (times)? 
+
+Answer:
+
+5) Using the above data, give the complexity of each SimpleMapADT method for 
+SimpleTreeMap and SimpleHashMap.  Justify your answer with your run results.
+
+Answer:
+
+
+ 

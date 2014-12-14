@@ -122,7 +122,7 @@ public class MapBenchmark {
 	max = calMax(array);
 	mean = calMean(array);
 	sd = calSD(array);
-	System.out.printf("\n%s\n",type);
+	System.out.printf("\n%s\n--------------------\n",type);
 	System.out
 	    .printf("Min: %d\nMax: %d\nMean: %f\nStandard Deviation: %f\n",
 		    min,
@@ -297,9 +297,11 @@ public class MapBenchmark {
 	    //Basic progress bar
 System.out.print(String.format("%.2f",100* ndx/(float)numIter) + "% done \r"); 
 	}
+	
 	fileScanner.close();
+	
 	// Obtain and print results for each structure and operation:
-	System.out.println("Result:");
+	System.out.printf("Results from %d runs of %s\n",numIter,args[0]);
 	printResult(hashGet, "HashMap: get");
 	printResult(hashPop, "HashMap: put");
 	printResult(hashFloor, "HashMap: floorKey");
