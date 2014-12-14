@@ -122,7 +122,7 @@ public class MapBenchmark {
 	max = calMax(array);
 	mean = calMean(array);
 	sd = calSD(array);
-	System.out.printf("\n%s:\n",type);
+	System.out.printf("\n%s\n",type);
 	System.out
 	    .printf("Min: %d\nMax: %d\nMean: %f\nStandard Deviation: %f\n",
 		    min,
@@ -194,116 +194,9 @@ public class MapBenchmark {
 	    hashMap = new SimpleHashMap<Integer, String>();
 	    treeMap = new SimpleTreeMap<Integer, String>();
 	    
-	    /*
-	    // Clock the hashMap put() method for population:
-	    long startTime = System.currentTimeMillis();
-	    fileScanner = new Scanner(inputFile);
-	    while (fileScanner.hasNext()) {
-		// Get key and value
-		String[] line = fileScanner.nextLine().split(" ");
-		int key = Integer.parseInt(line[0]);
-		String value = line[1];
-		
-		// Insert key and value into hashMap
-		hashMap.put(key, value);
-	    }
-	    // Calculate and store elapsed time:
-	    long elapsed = System.currentTimeMillis() - startTime;
-	    hashPop[ndx] = elapsed;
-	    
-	    
-	    // Clock the treeMap put() method for population:
-	    startTime = System.currentTimeMillis();
-	    fileScanner = new Scanner(inputFile);
-	    
-	    while (fileScanner.hasNext()) {
-		// Get key and value
-		String[] line = fileScanner.nextLine().split(" ");
-		int key = Integer.parseInt(line[0]);
-		String value = line[1];
-		
-		// Insert key and value into hashMap
-		treeMap.put(key, value);
-	    }
-	    // Calculate and store elapsed time:
-	    elapsed = System.currentTimeMillis() - startTime;
-	    treePop[ndx] = elapsed;
-	    
-	    // Clock the hashMap get() method:
-	    startTime = System.currentTimeMillis();
-	    
-	    Iterator<Integer> itr = keyList.iterator();
-	    while (itr.hasNext()) {
-		hashMap.get(itr.next());
-	    }
-	    // Calculate and store elapsed time:
-	    elapsed = System.currentTimeMillis() - startTime;
-	    hashGet[ndx] = elapsed;
-	    
-
-
-	    // Clock the treeMap get() method:
-	    startTime = System.currentTimeMillis();
-	    itr = keyList.iterator();
-	    while (itr.hasNext()) {
-		treeMap.get(itr.next());
-	    }
-	    // Calculate and store elapsed time:
-	    elapsed = System.currentTimeMillis() - startTime;
-	    treeGet[ndx] = elapsed;
-	    
-
-
-	    // Clock the hashMap floorKey() method:
-	    startTime = System.currentTimeMillis();
-	    itr = keyList.iterator();
-	    while (itr.hasNext()) {
-		hashMap.floorKey(itr.next());
-	    }
-	    // Calculate and store elapsed time:
-	    elapsed = System.currentTimeMillis() - startTime;
-	    hashFloor[ndx] = elapsed;
-	    
-	    
-	    
-	    // Clock the treeMap floorKey() method:	
-	    startTime = System.currentTimeMillis();
-	    itr = keyList.iterator();
-	    while (itr.hasNext()) {
-		treeMap.floorKey(itr.next());
-	    }
-	    // Calculate and store elapsed time:
-	    elapsed = System.currentTimeMillis() - startTime;
-	    treeFloor[ndx] = elapsed;
-	    
-	    
-	    
-	    // Clock the hashMap remove() method:
-	    startTime = System.currentTimeMillis();
-	    itr = keyList.iterator();
-	    while (itr.hasNext()) {
-		hashMap.remove(itr.next());
-	    }
-	    // Calculate and store elapsed time:
-	    elapsed = System.currentTimeMillis() - startTime;
-	    hashRemove[ndx] = elapsed;
-	    
-	    
-	    
-	    // Clock the treeMap remove() method:
-	    startTime = System.currentTimeMillis();
-	    itr = keyList.iterator();
-	    while (itr.hasNext()) {
-		treeMap.remove(itr.next());
-	    }
-	    // Calculate and store elapsed time:
-	    elapsed = System.currentTimeMillis() - startTime;
-	    treeRemove[ndx] = elapsed;
-	    */
-	    
-	    // Loop over 6 of the computations that require similar code
+	    // Loop over 8 of the computations that require similar code
 	    // (get, floor, remove for each map). Clock each in the loop.
-	    for (int valIdx = 0; valIdx < 6; valIdx++) {
+	    for (int valIdx = 0; valIdx < 8; valIdx++) {
 				
 		// Clock the hashMap get() method:
 		long startTime = System.currentTimeMillis();
@@ -364,13 +257,13 @@ System.out.print(String.format("%.2f",100* ndx/(float)numIter) + "% done \r");
 
 	// Obtain and print results for each structure and operation:
 	System.out.println("Result:");
-	printResult(hashPop, "HashMap: put");
-	printResult(treePop, "TreeMap: put");
 	printResult(hashGet, "HashMap: get");
-	printResult(treeGet, "TreeMap: get");
+	printResult(hashPop, "HashMap: put");
 	printResult(hashFloor, "HashMap: floorKey");
-	printResult(treeFloor, "TreeMap: floorKey");
 	printResult(hashRemove, "HashMap: remove");
+	printResult(treeGet, "TreeMap: get");
+	printResult(treePop, "TreeMap: put");	
+	printResult(treeFloor, "TreeMap: floorKey");	
 	printResult(treeRemove, "TreeMap: remove");
     }
 }
