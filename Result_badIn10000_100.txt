@@ -1,0 +1,57 @@
+Results from 100 runs of badIn10000.txt:
+
+HashMap: get
+--------------------
+Min: 0
+Max: 5
+Mean: 0.710000
+Standard Deviation: 0.738850
+
+HashMap: put
+--------------------
+Min: 1
+Max: 39
+Mean: 2.610000
+Standard Deviation: 3.859780
+
+HashMap: floorKey
+--------------------
+Min: 1146
+Max: 3431
+Mean: 1746.770000
+Standard Deviation: 502.831162
+
+HashMap: remove
+--------------------
+Min: 0
+Max: 6
+Mean: 0.690000
+Standard Deviation: 0.856680
+
+TreeMap: get
+--------------------
+Min: 0
+Max: 13
+Mean: 0.890000
+Standard Deviation: 1.310687
+
+TreeMap: put
+--------------------
+Min: 1
+Max: 17
+Mean: 1.520000
+Standard Deviation: 1.676186
+
+TreeMap: floorKey
+--------------------
+Min: 0
+Max: 4
+Mean: 0.930000
+Standard Deviation: 0.570175
+
+TreeMap: remove
+--------------------
+Min: 0
+Max: 8
+Mean: 0.780000
+Standard Deviation: 0.866949

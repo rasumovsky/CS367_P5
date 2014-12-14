@@ -35,6 +35,184 @@ What is the output for each of the runs?
 Answer:
 
 
+Results from 100 runs of randIn1000.txt:
+
+HashMap: get
+--------------------
+Min: 0
+Max: 1
+Mean: 0.070000
+Standard Deviation: 0.255147
+
+HashMap: put
+--------------------
+Min: 0
+Max: 7
+Mean: 0.310000
+Standard Deviation: 0.796178
+
+HashMap: floorKey
+--------------------
+Min: 5
+Max: 61
+Mean: 6.150000
+Standard Deviation: 5.589946
+
+HashMap: remove
+--------------------
+Min: 0
+Max: 2
+Mean: 0.090000
+Standard Deviation: 0.319218
+
+TreeMap: get
+--------------------
+Min: 0
+Max: 1
+Mean: 0.130000
+Standard Deviation: 0.336303
+
+TreeMap: put
+--------------------
+Min: 0
+Max: 6
+Mean: 0.210000
+Standard Deviation: 0.682569
+
+TreeMap: floorKey
+--------------------
+Min: 0
+Max: 2
+Mean: 0.080000
+Standard Deviation: 0.305941
+
+TreeMap: remove
+--------------------
+Min: 0
+Max: 3
+Mean: 0.090000
+Standard Deviation: 0.376696
+
+
+Results from 100 runs of randIn2000.txt:
+
+HashMap: get
+--------------------
+Min: 0
+Max: 2
+Mean: 0.070000
+Standard Deviation: 0.291719
+
+HashMap: put
+--------------------
+Min: 0
+Max: 12
+Mean: 0.290000
+Standard Deviation: 1.235273
+
+HashMap: floorKey
+--------------------
+Min: 17
+Max: 79
+Mean: 19.700000
+Standard Deviation: 6.173330
+
+HashMap: remove
+--------------------
+Min: 0
+Max: 2
+Mean: 0.100000
+Standard Deviation: 0.360555
+
+TreeMap: get
+--------------------
+Min: 0
+Max: 3
+Mean: 0.230000
+Standard Deviation: 0.486929
+
+TreeMap: put
+--------------------
+Min: 0
+Max: 9
+Mean: 0.410000
+Standard Deviation: 0.980765
+
+TreeMap: floorKey
+--------------------
+Min: 0
+Max: 3
+Mean: 0.230000
+Standard Deviation: 0.507050
+
+TreeMap: remove
+--------------------
+Min: 0
+Max: 4
+Mean: 0.220000
+Standard Deviation: 0.540000
+
+
+Results from 100 runs of randIn10000.txt:
+
+HashMap: get
+--------------------
+Min: 0
+Max: 5
+Mean: 0.540000
+Standard Deviation: 0.805233
+
+HashMap: put
+--------------------
+Min: 0
+Max: 17
+Mean: 1.410000
+Standard Deviation: 1.965172
+
+HashMap: floorKey
+--------------------
+Min: 430
+Max: 598
+Mean: 476.280000
+Standard Deviation: 34.881250
+
+HashMap: remove
+--------------------
+Min: 0
+Max: 5
+Mean: 0.490000
+Standard Deviation: 0.754917
+
+TreeMap: get
+--------------------
+Min: 0
+Max: 5
+Mean: 1.130000
+Standard Deviation: 0.626977
+
+TreeMap: put
+--------------------
+Min: 1
+Max: 13
+Mean: 1.700000
+Standard Deviation: 1.424781
+
+TreeMap: floorKey
+--------------------
+Min: 0
+Max: 6
+Mean: 1.180000
+Standard Deviation: 0.698284
+
+TreeMap: remove
+--------------------
+Min: 0
+Max: 8
+Mean: 0.710000
+Standard Deviation: 0.875157
+
+
+
 3) In this question you will again run TestHash four times, this time using the 
 parameters:
 	run4		 badIn1000.txt 100
@@ -44,6 +222,184 @@ parameters:
 What is the output for each of the runs?  
 
 Answer:
+
+
+Results from 100 runs of badIn1000.txt:
+
+HashMap: get
+--------------------
+Min: 0
+Max: 1
+Mean: 0.020000
+Standard Deviation: 0.140000
+
+HashMap: put
+--------------------
+Min: 0
+Max: 10
+Mean: 0.370000
+Standard Deviation: 1.064472
+
+HashMap: floorKey
+--------------------
+Min: 6
+Max: 98
+Mean: 8.740000
+Standard Deviation: 9.061589
+
+HashMap: remove
+--------------------
+Min: 0
+Max: 1
+Mean: 0.030000
+Standard Deviation: 0.170587
+
+TreeMap: get
+--------------------
+Min: 0
+Max: 2
+Mean: 0.170000
+Standard Deviation: 0.401373
+
+TreeMap: put
+--------------------
+Min: 0
+Max: 6
+Mean: 0.150000
+Standard Deviation: 0.653835
+
+TreeMap: floorKey
+--------------------
+Min: 0
+Max: 1
+Mean: 0.160000
+Standard Deviation: 0.366606
+
+TreeMap: remove
+--------------------
+Min: 0
+Max: 2
+Mean: 0.060000
+Standard Deviation: 0.276405
+
+
+Results from 100 runs of badIn2000.txt:
+
+HashMap: get
+--------------------
+Min: 0
+Max: 4
+Mean: 0.090000
+Standard Deviation: 0.449333
+
+HashMap: put
+--------------------
+Min: 0
+Max: 11
+Mean: 0.530000
+Standard Deviation: 1.203786
+
+HashMap: floorKey
+--------------------
+Min: 35
+Max: 98
+Mean: 40.610000
+Standard Deviation: 6.264016
+
+HashMap: remove
+--------------------
+Min: 0
+Max: 2
+Mean: 0.140000
+Standard Deviation: 0.374700
+
+TreeMap: get
+--------------------
+Min: 0
+Max: 1
+Mean: 0.220000
+Standard Deviation: 0.414246
+
+TreeMap: put
+--------------------
+Min: 0
+Max: 9
+Mean: 0.310000
+Standard Deviation: 0.976678
+
+TreeMap: floorKey
+--------------------
+Min: 0
+Max: 1
+Mean: 0.150000
+Standard Deviation: 0.357071
+
+TreeMap: remove
+--------------------
+Min: 0
+Max: 3
+Mean: 0.170000
+Standard Deviation: 0.448442
+
+
+Results from 100 runs of badIn10000.txt:
+
+HashMap: get
+--------------------
+Min: 0
+Max: 5
+Mean: 0.710000
+Standard Deviation: 0.738850
+
+HashMap: put
+--------------------
+Min: 1
+Max: 39
+Mean: 2.610000
+Standard Deviation: 3.859780
+
+HashMap: floorKey
+--------------------
+Min: 1146
+Max: 3431
+Mean: 1746.770000
+Standard Deviation: 502.831162
+
+HashMap: remove
+--------------------
+Min: 0
+Max: 6
+Mean: 0.690000
+Standard Deviation: 0.856680
+
+TreeMap: get
+--------------------
+Min: 0
+Max: 13
+Mean: 0.890000
+Standard Deviation: 1.310687
+
+TreeMap: put
+--------------------
+Min: 1
+Max: 17
+Mean: 1.520000
+Standard Deviation: 1.676186
+
+TreeMap: floorKey
+--------------------
+Min: 0
+Max: 4
+Mean: 0.930000
+Standard Deviation: 0.570175
+
+TreeMap: remove
+--------------------
+Min: 0
+Max: 8
+Mean: 0.780000
+Standard Deviation: 0.866949
+
 
 4) Briefly analyze your results from questions 2 and 3. Consider the 
 following aspects:

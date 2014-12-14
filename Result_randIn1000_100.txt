@@ -1,0 +1,57 @@
+Results from 100 runs of randIn1000.txt:
+
+HashMap: get
+--------------------
+Min: 0
+Max: 1
+Mean: 0.070000
+Standard Deviation: 0.255147
+
+HashMap: put
+--------------------
+Min: 0
+Max: 7
+Mean: 0.310000
+Standard Deviation: 0.796178
+
+HashMap: floorKey
+--------------------
+Min: 5
+Max: 61
+Mean: 6.150000
+Standard Deviation: 5.589946
+
+HashMap: remove
+--------------------
+Min: 0
+Max: 2
+Mean: 0.090000
+Standard Deviation: 0.319218
+
+TreeMap: get
+--------------------
+Min: 0
+Max: 1
+Mean: 0.130000
+Standard Deviation: 0.336303
+
+TreeMap: put
+--------------------
+Min: 0
+Max: 6
+Mean: 0.210000
+Standard Deviation: 0.682569
+
+TreeMap: floorKey
+--------------------
+Min: 0
+Max: 2
+Mean: 0.080000
+Standard Deviation: 0.305941
+
+TreeMap: remove
+--------------------
+Min: 0
+Max: 3
+Mean: 0.090000
+Standard Deviation: 0.376696
