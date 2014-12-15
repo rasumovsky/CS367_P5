@@ -424,6 +424,8 @@ The hashmap uses an array that contained Java's LinkedList data structure.
 The treemap uses the red-black tree data structure. Hence, the operations 
 would always be O(logN).
 
+
+
 The number of inputs will effect the time taken for the operation to run.
 But, it depends on the type of operations and their complexity.
 The time taken for O(1) will always be the same while O(logN) will increase
@@ -446,42 +448,64 @@ the most costly operation, since it requires a loop over the entire hash table
 5) Using the above data, give the complexity of each SimpleMapADT method for 
 SimpleTreeMap and SimpleHashMap.  Justify your answer with your run results.
 
-Answer:
+Answer: All the methods are executed N times, where N is the total number of
+items. Complexity = O(N) * complexity of that method
 
 HashMap mean values for bad inputs (worst cases):
   method   | N=1000 | N=2000 | N=10000 | W.C. Complexity |
-___________|________|________|_________|_________________|
-  get      | 0.020  | 0.090  | 0.710   | O(N)            |
+___________|________|________|_________|_____(total)_____|
+  get      | 0.020  | 0.090  | 0.710   | O(N^2)          |
   put      | 0.370  | 0.530  | 2.610   | O(N)            |
-  floorKey | 8.740  | 40.61  | 1746.8  | O(N^2)          |
-  remove   | 0.030  | 0.140  | 0.690   | O(N)            |
+  floorKey | 8.740  | 40.61  | 1746.8  | O(N^3)          |
+  remove   | 0.030  | 0.140  | 0.690   | O(N^2)          |
 
 HashMap mean values for random inputs (average cases):
   method   | N=1000 | N=2000 | N=10000 | Avg. Complexity |
-___________|________|________|_________|_________________|
-  get      | 0.070  | 0.070  | 0.540   | O(1)            |
-  put      | 0.310  | 0.290  | 1.410   | O(1)            |
+___________|________|________|_________|______(total)____|
+  get      | 0.070  | 0.070  | 0.540   | O(N)            |
+  put      | 0.310  | 0.290  | 1.410   | O(N)            |
   floorKey | 6.150  | 19.70  | 476.3   | O(N^2)          |
-  remove   | 0.090  | 0.100  | 0.490   | O(1)            |
+  remove   | 0.090  | 0.100  | 0.490   | O(N)            |
 
  
 
 TreeMap mean values for bad inputs (worst cases):
   method   | N=1000 | N=2000 | N=10000 | W.C. Complexity |
-___________|________|________|_________|_________________|
-  get      | 0.170  | 0.220  | 0.890   | O(log(N))       |
-  put      | 0.150  | 0.310  | 1.520   | O(N)            |
-  floorKey | 0.160  | 0.150  | 0.930   | O(log(N))       |
-  remove   | 0.060  | 0.170  | 0.780   | O(N)            |
+___________|________|________|_________|______(total)____|
+  get      | 0.170  | 0.220  | 0.890   | O(Nlog(N))      |
+  put      | 0.150  | 0.310  | 1.520   | O(Nlog(N))      |
+  floorKey | 0.160  | 0.150  | 0.930   | O(Nlog(N))      |
+  remove   | 0.060  | 0.170  | 0.780   | O(Nlog(N))      |
 
 TreeMap mean values for random inputs (average cases):
   method   | N=1000 | N=2000 | N=10000 | Avg. Complexity |
-___________|________|________|_________|_________________|
-  get      | 0.130  | 0.230  | 1.130   | O(log(N))       |
-  put      | 0.210  | 0.410  | 1.700   | O(log(N))       |
-  floorKey | 0.080  | 0.230  | 1.180   | O(N)            |
-  remove   | 0.090  | 0.220  | 0.710   | O(log(N))       |
+___________|________|________|_________|_____(total)_____|
+  get      | 0.130  | 0.230  | 1.130   | O(Nlog(N))      |
+  put      | 0.210  | 0.410  | 1.700   | O(Nlog(N))      |
+  floorKey | 0.080  | 0.230  | 1.180   | O(Nlog(N))      |
+  remove   | 0.090  | 0.220  | 0.710   | O(Nlog(N))      |
 (theoretically, it should O(log(N)) for all red-black trees operations right?)
 
 all these operations are executed N times, as we have to run throught all the values,
 do we have to consider that?
+
+Question 4
+All the operations in this program are run N time where N is the number of items.
+But, the complexity of the operations might differ.
+
+The treemap uses the red-black tree data structure. It is always a balanced 
+search tree with a height of O(log N). Hence, the complexity of the operations 
+would always be O(logN) even if its a worst case situation.
+
+Based on the statistics obtained, all the operations of treeMap has a O(N) * O(log(N))
+complexity. All the operations are run N time, which gives us a complexity of O(N).
+The complexity of all the operations are O(log(N)) even for the worse case because
+it is a balanced search tree with a height of logN. 
+
+Hence, the complexity is O(N) * O(log(N)) = O(Nlog(N)) for treemap.
+
+As for the hashmap. The hashmap uses an array of LinkedList.
+All the operations of hashmap are executed N times. Hence, this gives us a complexity
+of O(N) * complexity of operations.
+
+For the average case, 
