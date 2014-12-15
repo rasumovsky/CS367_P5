@@ -504,8 +504,22 @@ it is a balanced search tree with a height of logN.
 
 Hence, the complexity is O(N) * O(log(N)) = O(Nlog(N)) for treemap.
 
-As for the hashmap. The hashmap uses an array of LinkedList.
+As for the hashmap, it uses an array of LinkedList.
 All the operations of hashmap are executed N times. Hence, this gives us a complexity
 of O(N) * complexity of operations.
 
-For the average case, 
+For the average case, the items are distributed evenly throughout the array.
+The statistics showed that the time complexity for the get, put and remove method is
+O(1). If we multiply it by the amount of time its executed, it will be O(N) complexity.
+As for the floorkey, the statistic shows that the complexity is O(N^2).
+For each floorkey operation, we have to loop through each element in the array which
+gives us a complexity of O(N). When it is executed N times, it gives a complexity of
+O(N) * O(N) = O(N^2).
+
+For the worst case, all keys are hashed to the same index. This means that all items
+are bundled up together in a linkedlist. The insert operation will still be O(1).
+But, the get and remove operation will be O(N) since you have to lookup the whole
+array. 
+The floorKey method would be O(N) * O(N^2) = O(N^3). It is because the method has to look
+through the linkedlist which will give us a complexity of O(N), then it has to loop through
+the whole array, which is also O(N), and the method is executed N times.
