@@ -20,16 +20,13 @@ the lookup in this situation?  Briefly explain your answer.
 Answer:
 
 The worst-case would be when all items are hashed to the same index. In that 
-instance, the values would be entered into one LinkedList bucket. There are two 
-possibilities:
+instance, the values would be entered into one LinkedList bucket. 
 
-case (1) the LinkedList has a tail reference, so the add() method is O(1). 
-case (2) the LinkedList doesn't have a tail reference, so each call to add() 
-is O(N).
+The item would be added to the front of the LinkedList. The complexity would be
+O(1).
 
-Afterwards, there is the call to remove() for the LinkedList, which will be 
-O(N). Assuming Java uses a tail reference for the LinkedList, the result is 
-O(1) + O(N) = O(N).
+Afterwards, there is the call to lookup() for the LinkedList, which will be 
+O(N). The result is O(1) + O(N) = O(N).
 
 
 For questions 2 - 4, you should use the TestHash program as written.
