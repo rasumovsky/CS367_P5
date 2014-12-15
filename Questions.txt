@@ -25,8 +25,10 @@ instance, the values would be entered into one LinkedList bucket.
 The item would be added to the front of the LinkedList. The complexity would be
 O(1).
 
-Afterwards, there is the call to lookup() for the LinkedList, which will be 
-O(N). The result is O(1) + O(N) = O(N).
+Afterwards, there is the call to lookup() for the LinkedList, if the item is at 
+the end of the LinkedList, the complexity would be O(N). 
+
+The result is O(1) + O(N) = O(N).
 
 
 For questions 2 - 4, you should use the TestHash program as written.
@@ -418,8 +420,21 @@ affect the performance (times)?
 
 Answer:
 
+The hashmap uses an array that contained Java's LinkedList data structure.
+The treemap uses the red-black tree data structure. Hence, the operations 
+would always be O(logN).
 
-  
+The number of inputs will effect the time taken for the operation to run.
+But, it depends on the type of operations and their complexity.
+The time taken for O(1) will always be the same while O(logN) will increase
+slowly, following by O(N) which will increase linearly and O(N^2) which will
+increase exponentially.
+
+A bad input file would be a file where all the keys are mapped to the same 
+index in a hashtable. This will cause the hashtable to be unbalanced and 
+all the keys to be in one LinkedList. The complexity would be O(N) for most 
+of the time.
+
 The worst case scenario for a hash map is that the keys all map to the same
 hash index. This happens with the bad input files, since the keys are all 
 integers that equal zero when mod-ed by the current table size. In that case, 
@@ -459,10 +474,14 @@ ___________|________|________|_________|_________________|
   floorKey | 0.160  | 0.150  | 0.930   | O(log(N))       |
   remove   | 0.060  | 0.170  | 0.780   | O(N)            |
 
-TreeMap mean values for bad inputs (average cases):
+TreeMap mean values for random inputs (average cases):
   method   | N=1000 | N=2000 | N=10000 | Avg. Complexity |
 ___________|________|________|_________|_________________|
   get      | 0.130  | 0.230  | 1.130   | O(log(N))       |
   put      | 0.210  | 0.410  | 1.700   | O(log(N))       |
   floorKey | 0.080  | 0.230  | 1.180   | O(N)            |
   remove   | 0.090  | 0.220  | 0.710   | O(log(N))       |
+(theoretically, it should O(log(N)) for all red-black trees operations right?)
+
+all these operations are executed N times, as we have to run throught all the values,
+do we have to consider that?
