@@ -41,6 +41,7 @@ public class MapBenchmark {
     /**
      * A private method for calculating the minimum value in an array.
      * @param array - the array of numbers in which the minimum will be found.
+     * @return min - the minimum value in the array
      */
     private static long calMin(long[] array) {
 	long min = array[0];
@@ -57,6 +58,7 @@ public class MapBenchmark {
     /**
      * A private method for calculating the maximum value in an array.
      * @param array - the array of numbers in which the maximum will be found.
+     * @return max - the maximum value in the array
      */
     private static long calMax(long[] array) {
 	long max = array[0];
@@ -73,6 +75,7 @@ public class MapBenchmark {
     /**
      * A private method for calculating the mean value of an array.
      * @param array - the array of numbers for which the mean is found.
+     * @return the mean of the values in the array
      */
     private static double calMean(long[] array) {
 	long total = 0;
@@ -87,6 +90,7 @@ public class MapBenchmark {
     /**
      * A private method for calculating the standard deviation of an array.
      * @param array - the array of numbers for which the std deviation is found.
+     * @return SD - the standard deviation of the values in the array
      */
     private static double calSD(long[] array) {
 	
@@ -122,7 +126,7 @@ public class MapBenchmark {
 	max = calMax(array);
 	mean = calMean(array);
 	sd = calSD(array);
-	System.out.printf("\n%s\n--------------------\n",type);
+	System.out.printf("\n%s\n",type);
 	System.out
 	    .printf("Min: %d\nMax: %d\nMean: %f\nStandard Deviation: %f\n",
 		    min,
@@ -175,16 +179,7 @@ public class MapBenchmark {
 	}
 	
 	// Scan input file to store list of keys:
-	/*Scanner fileScanner = new Scanner(inputFile);
-	while (fileScanner.hasNext()) {
-	    String[] line = fileScanner.nextLine().split(" ");
-	    int key = Integer.parseInt(line[0]);
-	    String value = line[1];
-	    
-	    // Store list of keys
-	    //keyList.add(key);
-	    mapList.add(new Entry<Integer,String>(key,value));
-	}*///normal array seems to be faster than ArrayList
+	// Obtain the number of items
 	int lines = 0;
 	Scanner fileScanner = new Scanner(inputFile);
 	while(fileScanner.hasNext()){
@@ -197,6 +192,7 @@ public class MapBenchmark {
 	int[] keys = new int[lines];
 	String[] values = new String[lines];
 
+	//Store key and values into arrays
 	fileScanner = new Scanner(inputFile);
 	while(fileScanner.hasNext()){
 		String[] line = fileScanner.nextLine().split(" ");
@@ -222,53 +218,28 @@ public class MapBenchmark {
 				
 		// Clock the hashMap get() method:
 		long startTime = System.currentTimeMillis();
-		// Iterate over keys stored in the structures:
-		/*Iterator<Entry<Integer,String>> itr = mapList.iterator();
-		while (itr.hasNext()) {
-		    
-		    Entry<Integer,String> currEntry = itr.next();
-		    
-		    // Perform specified operation on specified structure:
-		    switch (valIdx) {
-		    case 0: hashMap.put(currEntry.getKey(),
-					currEntry.getValue());
-			break;
-		    case 1: treeMap.put(currEntry.getKey(),
-					currEntry.getValue());
-			break;
-		    case 2: hashMap.get(currEntry.getKey());
-			break;
-		    case 3: treeMap.get(currEntry.getKey());
-			break;
-		    case 4: hashMap.floorKey(currEntry.getKey());
-			break;
-		    case 5: treeMap.floorKey(currEntry.getKey());
-			break;
-		    case 6: hashMap.remove(currEntry.getKey());
-			break;
-		    case 7: treeMap.remove(currEntry.getKey());
-			break;
-		    }*///change implementation to speed up the time
 
-		    for(int i = 0; i < lines; i++){
-		    	switch (valIdx) {
-		    case 0: hashMap.put(keys[i],values[i]);
-			break;
-		    case 1: treeMap.put(keys[i],values[i]);
-			break;
-		    case 2: hashMap.get(keys[i]);
-			break;
-		    case 3: treeMap.get(keys[i]);
-			break;
-		    case 4: hashMap.floorKey(keys[i]);
-			break;
-		    case 5: treeMap.floorKey(keys[i]);
-			break;
-		    case 6: hashMap.remove(keys[i]);
-			break;
-		    case 7: treeMap.remove(keys[i]);
-			break;
-		    }
+	    // Iterate over keys stored in the structures:
+	    for(int i = 0; i < lines; i++){
+	    // Perform specified operation on specified structure:
+	    switch (valIdx) {
+	    case 0: hashMap.put(keys[i],values[i]);
+		break;
+	    case 1: treeMap.put(keys[i],values[i]);
+		break;
+	    case 2: hashMap.get(keys[i]);
+		break;
+	    case 3: treeMap.get(keys[i]);
+		break;
+	    case 4: hashMap.floorKey(keys[i]);
+		break;
+	    case 5: treeMap.floorKey(keys[i]);
+		break;
+	    case 6: hashMap.remove(keys[i]);
+		break;
+	    case 7: treeMap.remove(keys[i]);
+		break;
+	    }
 
 		}
 		
@@ -297,11 +268,9 @@ public class MapBenchmark {
 	    //Basic progress bar
 System.out.print(String.format("%.2f",100* ndx/(float)numIter) + "% done \r"); 
 	}
-	
 	fileScanner.close();
-	
 	// Obtain and print results for each structure and operation:
-	System.out.printf("Results from %d runs of %s\n",numIter,args[0]);
+	System.out.println("Result:");
 	printResult(hashGet, "HashMap: get");
 	printResult(hashPop, "HashMap: put");
 	printResult(hashFloor, "HashMap: floorKey");
